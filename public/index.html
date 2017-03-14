@@ -4,7 +4,7 @@
   <head>
     <!-- META -->
     <meta charset="utf-8">
-    <title>Pixelate - Node / Angular</title>
+    <title>Pixelize - Node / Angular</title>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script><!-- load angular -->
     <script src="./js/controllers/main.js"></script>
     <link rel="stylesheet" type="text/css" href="/stylesheets/main.css"></script>
@@ -13,17 +13,15 @@
   <body ng-app="ngPixelBoard">
     <div class="pixels-container" ng-controller="pixelBoardController">
 
-      <h1>Pixelate</h1>
-      <h2>Pixels go below</h2>
-
-      <form name = "pixelBoardForm" ng-submit = "addPixelBoard()">
+      <h1>Pixelize</h1>
+      <form name = "pixelBoardForm">
       <div class="block">
         <label>Login:</label>
-        <input name="user_name" placeholder="username" />
+        <input name="user_name" placeholder="username" ng-model="user_name" />
       </div>
       <div class= "block">
         <label>Picture Title:</label>
-        <input name="picture_name" placeholder="give picture a name" class="titleInput"/>
+        <input name="picture_name" placeholder="give picture a name" class="titleInput" ng-model="picture_name"/>
       </div>
 
       <div>
@@ -36,9 +34,17 @@
 
       </div>
       <div>
-        <button type="submit">Submit PixelBoard</button>
+        <button type="submit" ng-click="createPicture()">Submit PixelBoard</button>
       </div>
       </form>
+      <div>
+        <p> Users </p>
+        <p ng-repeat="user in users"> {{user}} </p>
+      </div>
+      <div>
+        <p> Pictures </p>
+        <p ng-repeat="picture in pictures"> {{picture}} </p>
+      </div>
 
 
       <table>
@@ -51,6 +57,10 @@
         {{ pixelBoard[1][0] }}
 
         {{ colorPal }}
+        {{ users }}
+        {{ pictures }}
+        {{ picture_name}}
+        {{ user_name}}
       </pre>
 
     </div>

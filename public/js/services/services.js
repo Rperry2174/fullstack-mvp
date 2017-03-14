@@ -29,7 +29,7 @@ angular.module('todoService', [])
 
 	// })
 
-	.factory('User',function($http) {
+	.factory('ser',function($http) {
 
 	  var getAll = function () {
 	    return $http({
