@@ -7,6 +7,7 @@
     <title>Pixelate - Node / Angular</title>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script><!-- load angular -->
     <script src="./js/controllers/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/main.css"></script>
 
   </head>
   <body ng-app="ngPixelBoard">
@@ -16,17 +17,40 @@
       <h2>Pixels go below</h2>
 
       <form name = "pixelBoardForm" ng-submit = "addPixelBoard()">
-        <input name="user_name" placeholder="Your name: " />
-        <div>
-          <span ng-repeat="pixel in pixelBoard track by $index" ng-click = "togglePixel($index)">{{pixel}}</span>
-        </div>
-        <input name="picture_name" placeholder="give picture a name" />
+      <div class="block">
+        <label>Login:</label>
+        <input name="user_name" placeholder="username" />
+      </div>
+      <div class= "block">
+        <label>Picture Title:</label>
+        <input name="picture_name" placeholder="give picture a name" class="titleInput"/>
+      </div>
+
+      <div>
+
+        <table>
+          <tr ng-repeat="row in pixelBoard track by $index" ng-init="rowIndex = $index">
+            <th ng-repeat="pixel in pixelBoard[rowIndex] track by $index" ng-init="pixelIndex = $index" ng-click = "togglePixel(rowIndex, pixelIndex)" ng-class="{0: 'white', 1: 'black'}[pixelBoard[rowIndex][pixelIndex]]">{{ pixelBoard[rowIndex][pixelIndex] }}</th>
+          </tr>
+        </table>
+
+      </div>
+      <div>
         <button type="submit">Submit PixelBoard</button>
+      </div>
       </form>
 
 
+      <table>
+          <th ng-repeat="pixel in colorPal track by $index" ng-class="{0: 'white', 1: 'black'}[colorPal[$index]]" ng-click = "changeMarker(colorPal[$index])">{{ colorPal[$index] }}</th>
+      </table>
+
+        <p> Current paintbrush color: {{ paintBrush }}</p>
       <pre>
         {{ pixelBoard }}
+        {{ pixelBoard[1][0] }}
+
+        {{ colorPal }}
       </pre>
 
     </div>
