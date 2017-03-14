@@ -34,7 +34,7 @@ angular.module('todoService', [])
 	  var getAll = function () {
 	    return $http({
 	      method: 'GET',
-	      url: '/'
+	      url: '/users'
 	    })
 	    .then(function (resp) {
 	      return resp.data;
@@ -44,7 +44,7 @@ angular.module('todoService', [])
 	  var addUser = function (user) {
 	    return $http({
 	      method: 'POST',
-	      url: '/',
+	      url: '/users',
 	      data: user //{pixelboard: [0, 0, 1, 1]}
 	    });
 	  };
