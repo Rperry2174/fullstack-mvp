@@ -16,7 +16,7 @@
       <h1>Pixelize</h1>
       <form name = "pixelBoardForm">
       <div class="block">
-        <label>Login:</label>
+        <label>Name:</label>
         <input name="user_name" placeholder="username" ng-model="user_name" />
       </div>
       <div class= "block">
@@ -28,7 +28,7 @@
 
         <table>
           <tr ng-repeat="row in pixelBoard track by $index" ng-init="rowIndex = $index">
-            <th ng-repeat="pixel in pixelBoard[rowIndex] track by $index" ng-init="pixelIndex = $index" ng-click = "togglePixel(rowIndex, pixelIndex)" ng-class="{0: 'white', 1: 'black'}[pixelBoard[rowIndex][pixelIndex]]">{{ pixelBoard[rowIndex][pixelIndex] }}</th>
+            <th ng-repeat="pixel in pixelBoard[rowIndex] track by $index" ng-init="pixelIndex = $index" ng-mouseover = "togglePixel(rowIndex, pixelIndex)" ng-class="{0: 'white', 1: 'black'}[pixelBoard[rowIndex][pixelIndex]]">{{ pixelBoard[rowIndex][pixelIndex] }}</th>
           </tr>
         </table>
 
@@ -37,22 +37,21 @@
         <button type="submit" ng-click="createUser(); createPicture()">Submit PixelBoard</button>
       </div>
       </form>
-<!--       <div>
-        <p> Users </p>
-        <p ng-repeat="user in users"> {{user}} </p>
-      </div> -->
 
-      <div>
-        <h2> Pictures </h2>
-        <p ng-repeat="picture in pictures"> {{picture}} </p>
-      </div>
-
-
+      <h1> Paintbrush Color </h1>
       <table>
           <th ng-repeat="pixel in colorPal track by $index" ng-class="{0: 'white', 1: 'black'}[colorPal[$index]]" ng-click = "changeMarker(colorPal[$index])">{{ colorPal[$index] }}</th>
       </table>
+      <p> Current paintbrush color: {{ paintBrush }}</p>
 
-        <p> Current paintbrush color: {{ paintBrush }}</p>
+      <div>
+        <h2> Past Pictures </h2>
+        <div>
+        <button ng-click="getPictures()">Get Past Pictures</button>
+        </div>
+        <p ng-repeat="picture in pictures" ng-click = "restorePicture(picture.pixels) "> {{picture.picture_name}} </p>
+      </div>
+
       <pre>
         {{ pixelBoard }}
         {{ pixelBoard[1][0] }}

@@ -14,7 +14,8 @@ angular.module('ngPixelBoard', [])
 		$scope.colorPal = [0, 1]
 		$scope.paintBrush = 1;
 
-		$scope.user_id = 1
+		$scope.user_id = 1;
+		$scope.picture_id = 1;
 
 		$scope.users = {};
 		$scope.pictures = {};
@@ -88,6 +89,8 @@ angular.module('ngPixelBoard', [])
 			data.user_id = $scope.user_id;
 			data.picture_name = $scope.picture_name;
 			data.pixels = $scope.pixelBoard;
+
+			$scope.picture_name = "";
 			console.log("Picture_data: ", data);
 
 			$http.post('/pictures', data) //create picture data
@@ -100,6 +103,10 @@ angular.module('ngPixelBoard', [])
 				.error(function(data) {
 					console.log('Error: ' + data);
 				});
+		}
+
+		$scope.restorePicture = function(array){
+			$scope.pixelBoard = array;
 		}
 
 
