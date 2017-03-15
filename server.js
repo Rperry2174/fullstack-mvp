@@ -13,7 +13,6 @@ var bodyParser = require('body-parser');  // pull information from HTML POST (ex
 mongoose.connect(database.url);
 var db = mongoose.connection
 
-console.log("mongoose connection", db);
 db.once('open', function(){
   console.log('Yay DB is now connected');
 }).on('error', function(){
@@ -64,7 +63,7 @@ app.post("/users", function(req, res){
 var Picture = require('./app/models/picture');
 app.get("/pictures", function(req, res){
 
-  Picture.find({user_id: 2}, function(err, result){
+  Picture.find({user_id: 1}, function(err, result){
     if (err) {
       console.log('Error fetching records', err);
     }

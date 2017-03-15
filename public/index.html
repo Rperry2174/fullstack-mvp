@@ -34,15 +34,16 @@
 
       </div>
       <div>
-        <button type="submit" ng-click="createPicture()">Submit PixelBoard</button>
+        <button type="submit" ng-click="createUser(); createPicture()">Submit PixelBoard</button>
       </div>
       </form>
-      <div>
+<!--       <div>
         <p> Users </p>
         <p ng-repeat="user in users"> {{user}} </p>
-      </div>
+      </div> -->
+
       <div>
-        <p> Pictures </p>
+        <h2> Pictures </h2>
         <p ng-repeat="picture in pictures"> {{picture}} </p>
       </div>
 

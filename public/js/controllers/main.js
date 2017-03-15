@@ -12,9 +12,10 @@ angular.module('ngPixelBoard', [])
 		];
 
 		$scope.colorPal = [0, 1]
-
-
 		$scope.paintBrush = 1;
+
+		$scope.user_id = 1
+
 		$scope.users = {};
 		$scope.pictures = {};
 
@@ -45,26 +46,30 @@ angular.module('ngPixelBoard', [])
 			$scope.paintBrush = $scope.colorPal[index];
 		}
 
-
-		$http.get('/users')
+		$scope.getUsers = function(){
+			$http.get('/users')
 			.success(function(data) {
 				$scope.users = data;
 			})
 			.error(function(data) {
 				console.log('Error: ' + data);
 			});
-
-		$scope.createUser = function(){
-			$http.post('/users') //create picture data
-			.success(function(data){
-				console.log("Successfully created picture: ", data);
-			})
-			.error(function(data) {
-				console.log('Error: ' + data);
-			});
 		};
 
+		$scope.createUser = function(){
+			var data = {};
+			data.user_id = $scope.user_id;
+			data.user_name = $scope.user_name;
+			console.log("User_data: ", data);
 
+			$http.post('/users', data) //create picture data
+				.success(function(data){
+					console.log("Successfully created user: ", data);
+				})
+				.error(function(data) {
+					console.log('Error: ' + data);
+				});
+		};
 
 		$scope.getPictures = function(){
 			$http.get('/pictures')
@@ -76,21 +81,21 @@ angular.module('ngPixelBoard', [])
 			});
 		};
 
-
 		$scope.createPicture = function(){
 			var data = {};
-			data.picture_id = 3;
-			data.user_id = 2;
+			data.picture_id = $scope.picture_id;
+			$scope.picture_id += 1; //increment the scope picture id to prevent duplicates
+			data.user_id = $scope.user_id;
 			data.picture_name = $scope.picture_name;
-			data.pixels = JSON.stringify($scope.pixelBoard);
-			// data.pixels = json.stringify($scope.pixelBoard);
-			console.log("DATA -------------------------: ", data);
+			data.pixels = $scope.pixelBoard;
+			console.log("Picture_data: ", data);
 
 			$http.post('/pictures', data) //create picture data
 				.success(function(data){
 					console.log("Successfully created picture: ", data);
 					$scope.pictures = data;
 					console.log("data in create pictue function");
+					$scope.getPictures();
 				})
 				.error(function(data) {
 					console.log('Error: ' + data);
