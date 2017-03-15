@@ -1,7 +1,7 @@
 
 .square {
-  width: 30px;
-  height: 30px;
+  width: 5px;
+  height: 5px;
   text-align: center;
 }
 
@@ -34,15 +34,13 @@ table, th , td  {
 table{
     border: 1px solid black;
     table-layout: fixed;
-    width: 200px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
 th, td {
-    border: 1px solid black;
-    width: 100px;
-    height: 100px;
+    width: 20px;
+    height: 10px;
   }
 
 label {
